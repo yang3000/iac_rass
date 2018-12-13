@@ -2,7 +2,7 @@
     <ul class="dropdown-menu">
         <!-- User image -->
         <li class="user-header">
-            <img src="static/dist/img/avatar04.png" class="img-circle" alt="User Image">
+            <img src="/static/dist/img/avatar04.png" class="img-circle" alt="User Image">
             <p>
                 {{userinfo.name}} - Web Developer
                 <small>Member since Nov. 2018</small>

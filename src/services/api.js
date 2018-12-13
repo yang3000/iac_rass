@@ -7,10 +7,12 @@ export default {
    */
   checkLogin () {
     return xhr({
-      url: '/auth/checkLogin'
+      url: '/checkLogin'
     })
   },
-
+  getMenusInfo () {
+    return xhr({url: '/getMenu'})
+  },
   /**
    * 登录
    * @param  {String} userData.username
@@ -19,7 +21,7 @@ export default {
   login (userData) {
     return xhr({
       method: 'post',
-      url: '/auth/login',
+      url: '/login',
       body: userData
     })
   }
