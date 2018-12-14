@@ -73,8 +73,19 @@ export default {
   },
   computed: {
   },
+  watch: {
+    "user": function(to,from) {
+      console.log('userDLg->watch->user',to,from)
+      console.log(11111)
+      this.userInfo = this.user
+    }
+  },
   updated:function(){
     console.log('userInfo......')
+  },
+  mounted:function(){
+    console.log('userInfoDlg......')
+    console.log(this.user)
   },
   methods: {
     doNothing: function () {
