@@ -11,21 +11,13 @@ var result_json = {
       id: 1,
       url: "/",
       name: "系统管理",
-      icon: "fa fa-pie-chart",
+      icon: "fa fa-fw fa-gear",
       children: [{
           id: 1,
           name: "用户管理",
           url: "main/userManage",
           pathName: 'userManage',
           filePath: 'SystemManage/UserManage',
-          icon: "default"
-        },
-        {
-          id: 2,
-          name: "任务管理",
-          url: "main/demanManage",
-          pathName: 'demanManage',
-          filePath: 'SystemManage/DemanManage',
           icon: "default"
         }
       ]
@@ -34,21 +26,21 @@ var result_json = {
       id: 2,
       url: "/",
       name: "需求管理",
-      icon: "fa fa-pie-chart",
+      icon: "fa fa-fw  fa-file-text",
       children: [{
           id: 1,
           name: "创建需求",
           url: "/main/createDemand",
           pathName: 'createDemand',
-          filePath: 'DemanManage/UserManage',
+          filePath: 'DemandManage/CreateDemand',
           icon: "default"
         },
         {
           id: 2,
-          name: "任务管理",
-          url: "/main/demanManage",
-          pathName: 'demanManage',
-          filePath: 'DemanManage/DemanManage',
+          name: "分配需求",
+          url: "/main/demandManage",
+          pathName: 'demandManage',
+          filePath: 'DemandManage/AssignDemand',
           icon: "default"
         }
       ]

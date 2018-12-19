@@ -18,6 +18,7 @@
 //import '../../static/dist/js/jquery.slimscroll.min.js'
 //import '../../static/dist/js/fastclick.js'
 //import 'static/js/layer.js'
+import 'static/css/main.css'
 import 'static/css/layer.css'
 import 'static/js/layer.js'
 import Navbar from '@/components/Navbar/'

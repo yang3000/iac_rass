@@ -1,35 +1,30 @@
 <template>
   <div class="content-wrapper">
-    <content-header menuName="用户管理" fatherMenuName="系统管理"></content-header>
+    <content-header menuName="创建需求" fatherMenuName="系统管理"></content-header>
 
     <section class="content">
       <div class="row">
         <form role="form" v-on:submit.prevent>
-          <div class="row">
-          <div class="col-lg-2">
-            <input type="text" v-model="queryUserId" class="form-control" id="userId" placeholder="">
+          <div class="col-xs-2">
+            <input type="text" v-model="queryDemandName" class="form-control" id="queryDemandName" placeholder>
           </div>
-          <div class="col-lg-2">
-            <input type="text" v-model="queryUserName" class="form-control" id="userName" placeholder="" >
-          </div>
-          <div class="col-lg-2">
-
           <button class="btn btn-warning" @click="queryUserList">查询</button>
-          </div>
-          </div>
         </form>
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <div>
-                <h2 class="box-title">用户列表</h2>
-                <a href="#" style="float:right"><i style="color: rgba(0, 0, 0, 0.62);" class="fa fa-fw fa-user-plus custom-size" @click="openAddUserDlg"></i></a>
-              
+              <div class="col-xs-11">
+                <h2 class="box-title">需求列表</h2>
               </div>
-         
-              <!-- <div class="col-xs-1 text-right">
-               <button type="button" class="btn btn-block btn-warning btn-sm">增加</button>
-              </div>-->
+              <div class="col-xs-1 text-right">
+                <a href="#">
+                  <i
+                    style="color: rgba(0, 0, 0, 0.62);"
+                    class="fa fa-fw fa-user-plus custom-size"
+                    @click="openCreateDemandDlg"
+                  ></i>
+                </a>
+              </div>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -37,7 +32,7 @@
                 <thead>
                   <tr role="row">
                     <th>序号</th>
-                    <th>用户工号</th>
+                    <th>需求名称</th>
                     <th>用户姓名</th>
                     <th>Email</th>
                     <th>所属部门</th>
@@ -54,10 +49,18 @@
                       <td>{{item.department}}</td>
                       <td style="width: 100px">
                         <div style="float:left;padding: 0 4px 0 4px ;width:50%;">
-                          <a v-on:click="openEditUserDlg"  style="border:0px;border-radius: 2px;" class="btn btn-block btn-warning btn-xs">编辑</a>
+                          <a
+                            v-on:click="openEditDemandDlg"
+                            style="border:0px;border-radius: 2px;"
+                            class="btn btn-block btn-warning btn-xs"
+                          >编辑</a>
                         </div>
                         <div style="float:left;padding: 0 4px 0 4px ;width:50%;">
-                          <a v-on:click="openEditUserDlg" style="border:0px;border-radius: 2px;" class="btn btn-block btn-danger btn-xs">删除</a>
+                          <a
+                            v-on:click="deleteDemand"
+                            style="border:0px;border-radius: 2px;"
+                            class="btn btn-block btn-danger btn-xs"
+                          >删除</a>
                         </div>
                       </td>
                     </tr>
@@ -66,9 +69,7 @@
               </table>
             </div>
             <!-- /.box-body -->
-
             <page :counts="count" @change-page="changePage"></page>
-
           </div>
         </div>
       </div>
@@ -85,17 +86,14 @@ import Page from '@/components/Common/Page'
 import axios from '@/http/axios'
 import Vue from 'vue'
 
-
-
 export default {
-  name: "UserManage",
+  name: "CreateDemand",
   components: { ContentHeader, UserDlg,Page },
   data: () => ({
     op: "add",
-    users:[],
-    queryUserId:"",
-    queryUserName:"",
-    user: {
+    demands:[],
+    queryDemandName:"",
+    demand: {
       userId: '',
       userName: '',
       password: '',
