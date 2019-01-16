@@ -6,7 +6,7 @@ import 'admin-lte/dist/css/AdminLTE.min.css'
 import 'admin-lte/dist/css/skins/_all-skins.min.css'
 import 'datatables.net-bs/css/dataTables.bootstrap.min.css'
 import 'font-awesome/css/font-awesome.min.css'
-import 'icheck/skins/square/blue.css'
+import 'icheck/skins/all.css'
 
 import 'expose-loader?$!expose-loader?jQuery!jquery'
 import 'bootstrap'
@@ -17,7 +17,7 @@ import 'jquery-slimscroll'
 import 'jquery-ui/ui/widgets/sortable.js'
 import 'jquery-ui/ui/widgets/datepicker.js'
 import 'jquery-ui/themes/base/datepicker.css'
-import 'icheck/icheck.js'
+import 'icheck/icheck.min.js'
 
 
 

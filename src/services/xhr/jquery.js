@@ -38,9 +38,17 @@ var result_json = {
         {
           id: 2,
           name: "分配需求",
-          url: "/main/demandManage",
-          pathName: 'demandManage',
-          filePath: 'DemandManage/AssignDemand',
+          url: "/main/allotDemand",
+          pathName: 'allotDemand',
+          filePath: 'DemandManage/AllotDemand',
+          icon: "default"
+        },
+        {
+          id: 3,
+          name: "收到的需求",
+          url: "/main/reveivedDemand",
+          pathName: 'receivedDemand',
+          filePath: 'DemandManage/ReceivedDemand',
           icon: "default"
         }
       ]

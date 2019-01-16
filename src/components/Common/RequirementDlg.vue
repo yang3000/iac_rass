@@ -1,59 +1,59 @@
 <template>
   <div class="box-info" hidden>
     <div class="box-header with-border">
-      <h3 class="box-title">添加用户</h3>
+      <h3 class="box-title">添加需求</h3>
     </div>
     <!-- /.box-header -->
     <!-- form start -->
     <form class="form-horizontal">
       <div class="box-body">
         <div class="form-group">
-          <label class="col-sm-3 control-label">用户姓名</label>
+          <label class="col-sm-3 control-label">专案名称</label>
           <div class="col-sm-7">
             <input
               type="text"
-              v-model="userInfo.userName"
+              v-model="requirementInfo.projectName"
               class="form-control"
-              id="username"
+              id="projectName"
               placeholder
             >
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-3 control-label">用户名</label>
+          <label class="col-sm-3 control-label">BU</label>
           <div class="col-sm-7">
             <input
               type="text"
-              v-model="userInfo.userId"
+              v-model="requirementInfo.bu"
               class="form-control"
-              id="userid"
+              id="bu"
               placeholder
             >
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-3 control-label">密码</label>
+          <label class="col-sm-3 control-label">站别</label>
           <div class="col-sm-7">
-            <input type="password" v-model="userInfo.password" class="form-control" placeholder>
+            <input
+              type="text"
+              v-model="requirementInfo.station"
+              class="form-control"
+              id="station"
+              placeholder
+            >
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-3 control-label">部门</label>
+          <label class="col-sm-3 control-label">需求描述</label>
           <div class="col-sm-7">
-            <input type="text" v-model="userInfo.department" class="form-control" placeholder >
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-sm-3 control-label">邮箱</label>
-          <div class="col-sm-7">
-            <input type="text" v-model="userInfo.email" class="form-control"  placeholder >
+            <textarea type="text" rows="3" v-model="requirementInfo.requirementDes" class="form-control" placeholder />
           </div>
         </div>
       </div>
       <!-- /.box-body -->
-      <div class="box-footer des-right">
+      <div class="box-footer des-right ">
         <button type="button" v-on:click="doNothing" class="btn btn-default custom-margin">取消</button>
-        <button type="button" v-on:click="saveUserInfo" class="btn btn-info custom-margin">保存</button>
+        <button type="button" v-on:click="saveRequirementInfo" class="btn btn-info custom-margin">保存</button>
       </div>
       <!-- /.box-footer -->
     </form>
@@ -64,20 +64,20 @@
 import axios from '@/http/axios'
 
 export default {
-  name: "UserDlg",
-  props: ["op","user"],
+  name: "RequirementDlg",
+  props: ["op","requirement"],
   data: function () {
     return {
-      userInfo: this.user
+      requirementInfo: this.requirement
     }
   },
   computed: {
   },
   watch: {
-    "user": function(to,from) {
+    "requirement": function(to,from) {
       console.log('userDLg->watch->user',to,from)
       console.log(11111)
-      this.userInfo = this.user
+      this.requirementInfo = this.requirement
     }
   },
   updated:function(){
@@ -85,18 +85,18 @@ export default {
   },
   mounted:function(){
     console.log('userInfoDlg......')
-    console.log(this.user)
+    console.log(this.requirement)
   },
   methods: {
     doNothing: function () {
         parent.layer.close(parent.layer.index);
     },
-    saveUserInfo: function () {
-      console.log(this.user)
+    saveRequirementInfo: function () {
+      console.log(this.requirement)
       axios({
         url: 'saveUserInfo',
         method: 'post',
-        data: this.user
+        data: this.requirement
       })
     }
   }

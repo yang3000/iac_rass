@@ -1,14 +1,11 @@
 <template>
   <div class="content-wrapper">
-    <content-header menuName="创建需求" fatherMenuName="系统管理"></content-header>
+    <content-header menuName="分配需求" fatherMenuName="系统管理"></content-header>
     <section class="content">
       <div class="row">
         <div role="form" v-on:submit.prevent>
           <div class="col-sm-12 col-md-2 custom-margin-4">
-            <input type="text" v-model="queryProjectName" class="form-control" id="queryProjectName" placeholder="输入专案名称">
-          </div>
-          <div class="col-sm-12 col-md-2 custom-margin-4">
-            <input type="text" v-model="queryBuName" class="form-control" id="queryBuName" placeholder="输入BU名称">
+            <input type="text" v-model="queryRequirementName" class="form-control" id="queryRequirementName" placeholder>
           </div>
           <div class="col-sm-12 col-md-2 custom-margin-4">
             <button class="btn btn-warning" @click="queryRequirementList">查询</button>
@@ -20,15 +17,6 @@
               <div class="col-xs-11">
                 <h2 class="box-title">需求列表</h2>
               </div>
-              <div class="col-xs-1 text-right">
-                <a href="#">
-                  <i
-                    style="color: rgba(0, 0, 0, 0.62);"
-                    class="fa fa-fw fa-file-text custom-size"
-                    @click="openAddRequirementDlg"
-                  ></i>
-                </a>
-              </div>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -36,10 +24,11 @@
                 <thead>
                   <tr role="row">
                     <th style="width: 50px;text-align: center">序号</th>
-                    <th style="width: 200px;">专案</th>
-                    <th style="width: 150px;">站别</th>
-                    <th style="width: 150px;">BU</th>
-                    <th style="width: 150px;">状态</th>
+                    <th style="width: 150px;">专案</th>
+                    <th style="width: 100px;">BU</th>
+                    <th style="width: 100px;">状态</th>
+                    <th style="width: 100px;">开发人</th>
+                    <th style="width: 200px;">任务期限</th>
                     <th>需求描述</th>
                     <th style="width: 150px;">创建时间</th>
                     <th >操作</th>
@@ -50,33 +39,22 @@
                     <tr :key="item.id">
                       <td style="text-align: center">{{item.id}}</td>
                       <td>{{item.projectName}}</td>
-                      <td>{{item.station}}</td>
                       <td>{{item.bu}}</td>
                       <td>{{status_cn(item.status)}}
+                      <td>{{item.developer}}</td>
+                      <td>{{item.deadline}}</td>
                       <td>{{item.requirementDes}}</td>
                       <td>{{item.createTime}}</td>
-                      <td style="width: 150px">
-                        <div style="float:left;padding: 0 4px 0 4px ;width:33.3%;">
-                          <a 
-                            v-on:click="openEditRequirementDlg"
-                            style="border:0px;border-radius: 2px;"
-                            class="btn btn-block btn-warning btn-xs"
-                          >编辑</a>
-                        </div>
-                        <div style="float:left;padding: 0 4px 0 4px ;width:33.3%;">
+                      <td style="width: 50px">
+                    
+                        <div style="float:left;padding: 0 4px 0 4px ;width:100%;">
                           <a
                             v-on:click="openCheckRequirementDlg"
                             style="border:0px;border-radius: 2px;"
                             class="btn btn-block btn-info btn-xs"
-                          >验证</a>
+                          >分配</a>
                         </div>
-                        <div style="float:left;padding: 0 4px 0 4px ;width:33.3%;">
-                          <a
-                            v-on:click="deleteRequirement"
-                            style="border:0px;border-radius: 2px;"
-                            class="btn btn-block btn-danger btn-xs"
-                          >删除</a>
-                        </div>
+        
                       </td>
                     </tr>
                   </template>
@@ -89,27 +67,24 @@
         </div>
       </div>
     </section>
-    <requirement-dlg id="requirementDlg" :op="op" :requirement="requirement"></requirement-dlg>
-    <check-requirement-dlg id="checkRequirementDlg" :op="op" :requirement="requirement"></check-requirement-dlg>
+    <allot-requirement-dlg id="checkRequirementDlg" :op="op" :requirement="requirement"></allot-requirement-dlg>
   </div>
 </template>
 
 <script>
 import ContentHeader from "@/components/Mcontent/ContentHeader"
-import RequirementDlg from "@/components/Common/RequirementDlg"
-import CheckRequirementDlg from "@/components/Common/CheckRequirementDlg"
+import AllotRequirementDlg from "@/components/Common/AllotRequirementDlg"
 import Page from '@/components/Common/Page'
 import axios from '@/http/axios'
 import Vue from 'vue'
 
 export default {
-  name: "CreateDemand",
-  components: { ContentHeader, RequirementDlg,CheckRequirementDlg,Page },
+  name: "AllotDemand",
+  components: { ContentHeader,AllotRequirementDlg,Page },
   data: () => ({
     op: "add",
     requirements:[],
-    queryProjectName:"",
-    queryBuName:"",
+    queryRequirementName:"",
     requirement: {
       projectName: '',
       bu: '',
@@ -142,18 +117,6 @@ export default {
       })
     },
 
-    //打开需求 创建/修改 窗口
-    requirementDlg: function () {
-      layer.open({
-        type: 1,
-        title: false,
-        closeBtn: 0,
-        shadeClose: true,
-        area: ['600px'],
-        resize: false,
-        content: $("#requirementDlg")
-      });
-    },
      //打开需求验证窗口
     checkRequirementDlg: function () {
       layer.open({
@@ -166,16 +129,6 @@ export default {
         content: $("#checkRequirementDlg")
       });
     },
-    openAddRequirementDlg: function () {
-      this.op = "add"
-      this.requirementDlg()
-    },
-
-    openEditRequirementDlg: function(){
-      this.op = "edit"
-      this.getRequirementInfo()
-      this.requirementDlg()
-    },
 
     openCheckRequirementDlg: function(){
       this.op = "check"
@@ -183,26 +136,15 @@ export default {
       this.checkRequirementDlg()
     },
 
-    deleteRequirement: function(){
-      this.op = "delete"
-      axios({
-        url: '/deleteRequirement',
-        method: 'post'
-      }).then(res => {
-        //this.requirement = res.data.data
-      }).catch(error => {
-        console.log(error)
-      })
-    },
     queryRequirementList: function(){
       console.log('查询需求列表')
       axios({
             url: '/QueryRequirementList',
             method: 'post',
             data:{
-              projectName:this.queryProjectName,
-              bu:this.queryBuName,
-              op:'pe'
+              projectName:this.queryUserId,
+              bu:this.queryUserName,
+              op:'boss'
             }
           }).then(res => {
             console.log(res)

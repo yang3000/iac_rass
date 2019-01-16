@@ -1,23 +1,19 @@
 <template>
   <div class="content-wrapper">
     <content-header menuName="用户管理" fatherMenuName="系统管理"></content-header>
-
     <section class="content">
       <div class="row">
-        <form role="form" v-on:submit.prevent>
-          <div class="row">
-          <div class="col-lg-2">
-            <input type="text" v-model="queryUserId" class="form-control" id="userId" placeholder="">
-          </div>
-          <div class="col-lg-2">
-            <input type="text" v-model="queryUserName" class="form-control" id="userName" placeholder="" >
-          </div>
-          <div class="col-lg-2">
-
-          <button class="btn btn-warning" @click="queryUserList">查询</button>
-          </div>
-          </div>
-        </form>
+        <div v-on:submit.prevent>
+            <div class="col-sm-12 col-md-2 custom-margin-4">
+              <input type="text" v-model="queryUserId" class="form-control" id="userId" placeholder="">
+            </div>
+            <div class="col-sm-12 col-md-2 custom-margin-4">
+              <input type="text" v-model="queryUserName" class="form-control" id="userName" placeholder="" >
+            </div>
+            <div class="col-sm-12 col-md-2 custom-margin-4">
+              <button class="btn btn-warning" @click="queryUserList">查询</button>
+            </div>
+        </div>
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
@@ -194,10 +190,9 @@ export default {
 };
 </script>
 <style scoped>
-form {
-  margin-bottom: 15px;
-}
+
 .box {
+  margin-top: 15px;
   border-top: 0px;
 }
 .box-body {
@@ -210,7 +205,10 @@ form {
   width: 50px;
   float: right;
 }
-
+.custom-margin-4 {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
 .custom-size {
   font-size: 20px;
 }

@@ -6,12 +6,12 @@
     <!-- /.box-header -->
     <div class="box-body">
       <table class="table table-bordered">
-            <thead>
-    <tr>
-      <th>Month</th>
-      <th>Savings</th>
-    </tr>
-  </thead>
+        <thead>
+          <tr>
+            <th>Month</th>
+            <th>Savings</th>
+          </tr>
+        </thead>
         <tbody>
           <template v-for="item in data">
             <tr :key="item.id">
@@ -42,34 +42,34 @@
 </template>
 
 <script>
-import ContentHeader from "@/components/Mcontent/ContentHeader"
-import UserDlg from "@/components/Common/UserDlg"
-import axios from '@/http/axios'
-import Vue from 'vue'
+  import ContentHeader from "@/components/Mcontent/ContentHeader"
+  import UserDlg from "@/components/Common/UserDlg"
+  import axios from '@/http/axios'
+  import Vue from 'vue'
 
 
 
-export default {
-  name: "DataTable",
-  props: ["title", "data", "count"],
-  data: () => ({
-    op: "add",
-    user: {
-      userId: '',
-      userName: '',
-      password: '',
-      email: '',
-      department: ''
-    }
-  }),
-  watch: {
-    $route(to, from) {
-      console.log("43erere");
-    },
-    op(val) {
-      if (val === 'add') {
-        for (let key in this.user) this.user[key] = ''
+  export default {
+    name: "DataTable",
+    props: ["title", "data", "count"],
+    data: () => ({
+      op: "add",
+      user: {
+        userId: '',
+        userName: '',
+        password: '',
+        email: '',
+        department: ''
       }
+    }),
+    watch: {
+      $route(to, from) {
+        console.log("43erere");
+      },
+      op(val) {
+        if (val === 'add') {
+          for (let key in this.user) this.user[key] = ''
+        }
     }
   },
   methods: {
@@ -104,14 +104,14 @@ export default {
   mounted: function () {
 
     var data = [
-      {
-        "name": "Tiger Nixon",
-        "position": "System Architect",
-        "salary": "$3,120",
-        "start_date": "2011/04/25",
-        "office": "Edinburgh",
-        "extn": "5421"
-      }
+    {
+      "name": "Tiger Nixon",
+      "position": "System Architect",
+      "salary": "$3,120",
+      "start_date": "2011/04/25",
+      "office": "Edinburgh",
+      "extn": "5421"
+    }
     ];
 
 
@@ -135,16 +135,16 @@ form {
 }
 /* .box-title {
   margin-top: 10px;
-} */
-.btn-sm {
-  width: 50px;
-  float: right;
-}
+  } */
+  .btn-sm {
+    width: 50px;
+    float: right;
+  }
 
-.custom-size {
-  font-size: 20px;
-}
+  .custom-size {
+    font-size: 20px;
+  }
 /* .text-right {
   float: right;
-} */
+  } */
 </style>

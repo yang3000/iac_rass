@@ -2,10 +2,9 @@
     <section  class="bottom-line content-header">
         <h1>
             {{menuName}}
-            <small>Control panel</small>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
             <li class="active">{{fatherMenuName}}</li>
             <li class="active">{{menuName}}</li>
         </ol>
